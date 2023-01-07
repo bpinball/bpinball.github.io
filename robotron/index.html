@@ -1,16 +1,136 @@
+<!DOCTYPE HTML>
 <html>
-<head>
-<script src="jsspeccy.js"></script>
-</head>
-<body>
-<h1>Robotron</h1>
-<div id="jsspeccy"></div>
+	<head>
+		<title>jsspeccy</title>
+		<link rel="stylesheet" href="jsspeccy.css">
+		<script src="lib/jdataview.js"></script>
+		<script src="core/jsspeccy.js"></script>
+		<script src="core/display.js"></script>
+		<script src="core/io_bus.js"></script>
+		<script src="core/keyboard.js"></script>
+		<script src="core/memory.js"></script>
+		<script src="core/sna_file.js"></script>
+		<script src="core/sound.js"></script>
+		<script src="core/spectrum.js"></script>
+		<script src="core/tap_file.js"></script>
+		<script src="core/tzx_file.js"></script>
+		<script src="core/viewport.js"></script>
+		<script src="core/z80_file.js"></script>
+		<script src="z80.js"></script>
+		<script src="roms.js"></script>
+		<script src="autoloaders.js"></script>
+		<script src="lib/jquery-1.7.2.min.js"></script>
+		<script src="ui.js"></script>
 
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: Helvetica, Arial, sans-serif;
+				background-color: #222;
+				color: #ddd;
+			}
+			h1, h2 {
+				padding: 0; margin: 0;
+			}
+			a:link {
+				color: #77f;
+			}
+			a:visited {
+				color: #97f;
+			}
+			a:hover, a:active {
+				color: #99f;
+			}
+			#jsspeccy {
+				margin: 10px;
+				padding-right: 10px;
+				float: left;
+			}
 
-<script>
-emu = JSSpeccy(
-  document.getElementById('jsspeccy'), 
-  {zoom: 2, machine: 48, openUrl: "https://bpinball.github.io/robotron/Robotron.tap"})
-</script>
-</body>
+			.hard-edged-pixels {
+				/*
+				Enable these rules if you want hard-edged pixels
+				(which is not at all what a Spectrum looked like back in the day,
+				but hey, the kids seem to like it or something)
+				*/
+				
+				image-rendering: optimizeSpeed;
+				image-rendering: -moz-crisp-edges;
+				image-rendering: -o-crisp-edges;
+				image-rendering: -webkit-optimize-contrast;
+				image-rendering: crisp-edges;
+				image-rendering: pixelated;
+				-ms-interpolation-mode: nearest-neighbor;
+			}
+
+			.commentary {
+				float: left;
+				width: 350px;
+				padding-top: 10px;
+			}
+			.commentary h1 {
+				background-image: url('images/spectrum48k.png');
+				line-height: 100px;
+				padding-left: 138px;
+				background-repeat: no-repeat;
+			}
+			.commentary .version {
+				font-size: 0.4em;
+			}
+			.commentary h2 {
+				font-size: 12pt;
+			}
+			.commentary small {
+				font-size: 0.8em;
+				color: #ccc;
+			}
+			.key {
+				color:red;
+			}
+		</style>
+		<script>
+			$(function() {
+				var jsspeccy = JSSpeccy('jsspeccy-viewport', {
+					'autostart': true,
+					'measurePerformance': false,
+					'audio' : false,
+					'loadFile': "Robotron.tap",
+					'autoload': true,
+					'scaleFactor': 3,
+				});
+				JSSpeccy.UI({
+					container: 'jsspeccy',
+					controller: jsspeccy
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="jsspeccy">
+			<div id="jsspeccy-viewport"></div>
+			<ul class="toolbar">
+				<li><button class="stop-start" title="Stop / start">stop / start</button></li>
+				<li><button class="reset" title="Reset the Spectrum">reset</button></li>
+				<li><button class="audio" title="Audio on/off">audio on/off</button></li>
+				<li><label><input type="checkbox" id="infinite-lives">Infinite Lives Cheat</label></li>
+			</ul>
+		</div>
+		<div class="commentary">
+			<h1>Robotron</span></h1>
+			<h2>By Paul Bustin</h2>
+			<h3>Keys</h3>
+			<table>
+				<tr><td>Left</td><td class="key">Z</td></tr>
+				<tr><td>Right</td><td class="key">X</td></tr>
+				<tr><td>Up</td><td class="key">L</td></tr>
+				<tr><td>Down</td><td class="key">Ctrl</td></tr>
+				<tr><td>Fire</td><td class="key">P or Shift</td></tr>
+			</table>
+			<p>Or use a joystick!</p>
+			<small>
+				<p>Emulator by <a href="https://github.com/gasman/jsspeccy2">JSSpeccy2</a>
+			</small>
+		</div>
+	</body>
 </html>
